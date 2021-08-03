@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Library.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>BooksList</h2>
+<table id="books" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Book</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+         {
+            <tr>
+                <td>@book.Title</td>
+                <td>
+                    <button data-book-id="@book.ID" class="btn-link js-delete">Delete</button>
+                </td>
+            </tr>
+         }
+    </tbody>
+</table>
+
+@section scripts 
+{
+    <script>
+        $(document).ready(function () {
+            $("#books").DataTable({
+                ajax: {
+                    url: "api/books",
+                    dataSrc: ""
+                },
+                colums: [
+                    {
+                        data: "name",
+                        render: function (data, type, book) {
+                            return "<"
+                        }
+                    }
+                ]
+            });
+
+            $("#books").on("click", ".js-delete",function () {
+                var button = $(this);
+
+                if (confirm("Are you sure you want to delete this book?")) {
+                    $.ajax({
+                        url: "api/books" + button.attr("data-book-id"),
+                        method: "DELETE",
+                        success: function () {
+                            button.parents("tr").remove();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
