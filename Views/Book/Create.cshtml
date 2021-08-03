@@ -1,13 +1,13 @@
 ﻿@model Library.Models.Book
 
 @{
-    ViewBag.Title = "New";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>New</h2>
 
-@using (Html.BeginForm("CreateBook", "Books"))
+@using (Html.BeginForm("Create", "Book"))
 {
     <div class="form-group">
         @Html.LabelFor(m => m.Title)

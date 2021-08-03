@@ -10,7 +10,9 @@
     <thead>
         <tr>
             <th>Book</th>
+            <th>Author</th>
             <th>Category</th>
+            <th>ReleaseDate</th>
         </tr>
     </thead>
     <tbody>
@@ -28,18 +30,29 @@
 
 @section scripts 
 {
-    <script>
+<script>
+const { Tab } = require("bootstrap");
+
         $(document).ready(function () {
-            $("#books").DataTable({
+            var table = $("#books").DataTable({
                 ajax: {
-                    url: "api/books",
+                    url: "api/books/getbooks",
                     dataSrc: ""
                 },
                 colums: [
                     {
                         data: "name",
                         render: function (data, type, book) {
-                            return "<"
+                            return "<a href='book/edit/" + book.id + "'>" + book.title + "</a>";
+                        }
+                    },
+                    {
+                        data: "books.category"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "button class='btn-link js-delete' data-book-id" + data + ">Delete</button";
                         }
                     }
                 ]
@@ -50,14 +63,14 @@
 
                 if (confirm("Are you sure you want to delete this book?")) {
                     $.ajax({
-                        url: "api/books" + button.attr("data-book-id"),
+                        url: "api/books/deletebook" + button.attr("data-book-id"),
                         method: "DELETE",
                         success: function () {
-                            button.parents("tr").remove();
+                            table.row(button.parents("tr")).remove();
                         }
                     });
                 }
             });
         });
-    </script>
+</script>
 }

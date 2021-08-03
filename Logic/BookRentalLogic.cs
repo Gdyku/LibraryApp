@@ -51,7 +51,6 @@ namespace Library.Logic
             rentalTable.ReturnDate.Add(DateTime.Now);
 
             await _context.SaveChangesAsync();
-
         }
     }
 }

@@ -99,4 +99,3 @@ C:\Users\Gdyku\Desktop\farmaprommvc\Library\bin\Unity.Abstractions.pdb
 C:\Users\Gdyku\Desktop\farmaprommvc\Library\bin\Unity.Container.pdb
 C:\Users\Gdyku\Desktop\farmaprommvc\Library\obj\Debug\Library.Migrations.InitialMigration.resources
 C:\Users\Gdyku\Desktop\farmaprommvc\Library\obj\Debug\Library.csproj.GenerateResource.cache
-C:\Users\Gdyku\Desktop\farmaprommvc\Library\obj\Debug\Library.Migrations.PopulateDatabase.resources

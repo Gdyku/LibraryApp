@@ -20,34 +20,74 @@ namespace Library.API
             _bookLogic = bookLogic;
         }
 
-        [HttpGet('getbooks')]
+        [Route("getbooks")]
+        [HttpGet]
         public async Task<List<BookDTO>> GetBooksAsync()
         {
-            return await _bookLogic.GetBooks();
+            try
+            {
+                return await _bookLogic.GetBooks();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        [HttpGet('getbooks/{id}')]
+        [Route("getbook/{id}")]
+        [HttpGet]
         public async Task<BookDTO> GetBookAsync(Guid id)
         {
-            return await _bookLogic.GetBook(id);
+            try
+            {
+                return await _bookLogic.GetBook(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            } 
         }
 
-        [HttpPost('createbook')]
+        [Route("createbook")]
+        [HttpPost]
         public async Task CreatBookAsync([FromBody] BookDTO book)
         {
-            await _bookLogic.CreateBook(book);
+            try
+            {
+                await _bookLogic.CreateBook(book);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        [HttpPut('editbook')]
+        [Route("editbook/{id}")]
+        [HttpPut]
         public async Task EditBookAsync([FromBody] BookDTO book)
         {
-            await _bookLogic.EditBook(book);
+            try
+            {
+                await _bookLogic.EditBook(book);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        [HttpDelete('deletebook/{id}')]
+        [Route("deletebook/{id}")]
+        [HttpDelete]
         public async Task DeleteBookAsync(Guid id)
         {
-            await _bookLogic.DeleteBook(id);
+            try
+            {
+                await _bookLogic.DeleteBook(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            } 
         }
     }
 }

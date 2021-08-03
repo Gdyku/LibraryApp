@@ -21,9 +21,9 @@ namespace Library.Controllers
             _context = new DataContext();
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var books = _context.Books.ToList();
+            var books = await _context.Books.ToListAsync();
             return View(books);
         }
 
@@ -45,9 +45,13 @@ namespace Library.Controllers
         [HttpPost]
         public ActionResult Create(Book book)
         {
-            _context.Books.Add(book);
-            _context.SaveChanges();
-            return RedirectToAction("Index", "Book");
+            if (ModelState.IsValid)
+            {
+                _context.Books.Add(book);
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Book");
+            }
+            return View();
         }
 
         public ActionResult Edit(Guid id)
